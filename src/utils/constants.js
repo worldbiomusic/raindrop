@@ -1,0 +1,1 @@
+export const FAUCET_TOKEN_AMOUNT = 100;
