@@ -1,15 +1,15 @@
 import express from 'express'
 import cors from 'cors'
 import { writeContract } from '@wagmi/core'
-import { abi } from './abi'
-import { config } from './config'
-import { FAUCET_TOKEN_AMOUNT } from './utils/constants'
-
-const app = express()
-const port = 3001
+import { erc20Abi } from 'viem'
+import { FAUCET_TOKEN_AMOUNT, TOKEN_DECIMALS } from './utils/constants.js'
+import { walletClient, adminAccount } from './utils/accounts.js'
 
 let canMint = {} // 나중에 날짜로 바꾸기
 
+// express 서버 생성
+const app = express()
+const port = 3001
 app.use(cors())
 app.use(express.static('public'))
 
@@ -56,8 +56,8 @@ app.get('/mint', async (req, res) => {
                 "type": "function"
             }],
             functionName: 'mint',
-            args: [address, FAUCET_TOKEN_AMOUNT * 10 ** data?.decimals],
-            account: adminAccount
+            args: [address, FAUCET_TOKEN_AMOUNT * 10 ** TOKEN_DECIMALS],
+            account: adminAccount,
         })
 
         canMint[address] = false;

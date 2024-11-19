@@ -15,7 +15,7 @@ async function main(contractName) {
 }
 
 
-main(process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS)
+main(process.env.NEXT_PUBLIC_TOKEN_CONTRACT_NAME)
   .then(() => process.exit(0))
   .catch(error => {
     console.error(error);

@@ -49,13 +49,9 @@ export function TokenManagerComponent() {
     setMessage("토큰 받기 처리 중...")
 
     const response = await axiosBase.get(`/mint?address=${address}`)
-    // .then(function (response) {
-    //   console.log(response);
-    // }).catch(function (error) {
-    //   console.log(error);
-    // })
 
     const data = response.data;
+    console.log(data);
     const msg = data.msg;
     const hash = data.hash;
     const amount = data.amount;
@@ -64,10 +60,11 @@ export function TokenManagerComponent() {
       console.log('hash:', hash);
       // setBalance((prevBalance) => prevBalance + FAUCET_TOKEN_AMOUNT)
       setMessage(`${amount} 토큰을 받았습니다!`)
-    } if (msg === '쿨다운') {
+    } else if (msg === '쿨다운') {
       setMessage(`쿨다운 중입니다.`)
     } else {
-      setMessage(`실패 ㅠㅠ`)
+      setMessage(`실패 ㅠㅠ...`)
+      console.log(msg)
     }
   }
 
